@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+        - name: updateing apt
+          apt:
+                  update_cache: yes
+  
+
+        - name: installing net-tools package
+          apt:
+                name: python3-ldap
+                state: latest
+
+
+        - name: installing python3-ldap package
+          apt:
+                name: python3-ldap
+                state: latest
