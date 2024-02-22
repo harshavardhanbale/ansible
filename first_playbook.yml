@@ -5,7 +5,7 @@
   tasks:
 
         - name: updateing apt
-          tags: apt_update, appserver
+          tags: always
           apt:
                   update_cache: yes
   
@@ -22,6 +22,7 @@
 
 
         - name: installing python3-ldap package
+          tags: python3-ldap,appserver
           apt:
                 name: python3-ldap
                 state: latest
@@ -30,12 +31,13 @@
   pre_tasks: 
         
         - name: updateing apt
-          tags: apt_update, webserver
+          tags: always
           apt:
                   update_cache: yes
 
 
         - name: installing net-tools package
+          tags: net-tools,webserver
           apt:
                 name:
                        - "{{apache_package}}"
