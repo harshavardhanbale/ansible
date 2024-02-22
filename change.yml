@@ -1,0 +1,26 @@
+#harsha vardhan bale
+#webserver = auth
+#webservers = authend
+---
+
+- hosts : webserver
+  become : true
+  tasks : 
+        
+        - name : changing the file
+          tags: webserver
+          lineinfile : 
+                path : /home/ubuntu/harsha
+                regexp : '^webserver'
+                line : webserver = authend222
+          register : httpd
+        
+        
+        - name : restart httpd
+          tags : apache2
+          service : 
+                name : apache2
+                state : started
+                enabled : yes
+          when : httpd.changed
+

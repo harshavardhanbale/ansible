@@ -1,0 +1,20 @@
+---
+
+- hosts: webserver
+  become: true
+  tasks : 
+       
+        - name : installing apt unzip
+          tags : zip,webserver
+          apt : 
+                name: zip
+                state : latest
+        - name : installing zip file terraform
+          tags : webserver,terraform
+          unarchive : 
+                src : https://releases.hashicorp.com/terraform/1.7.4/terraform_1.7.4_linux_arm64.zip
+                dest : /usr/local/bin
+                remote_src : yes
+                mode : 0755
+                owner : root
+                group : root
