@@ -1,0 +1,33 @@
+---
+
+- hosts : all
+  become : true
+  tasks : 
+        
+        - name : creating harsha user
+          tags : always
+          user : 
+                name : harsha
+                groups : root
+
+
+
+        - name : adding authorized keys
+          tags : always
+          authorized_key :
+                        user : harsha
+                        key : ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGJaxFa1bwkx4mrbVrQ0dAsDmzsJ2ib0Z/y3Telo7OxsWY6fpR4T75GRsKzkXkogQPgMNzc7/DR9KLGSjWFG24rdIp5cpN+aV7kYxKyNgBIc6n7ow7SGdK8b3ev5bNs83aYb38GsahFUVOx0I9nGuNb0fOJCcblZIAp2V8/K4w+y8esnIXjYR+oUJNIhw3xMHtGIP2n0lnWo8C6oHHxDWfsV+H3Ra/x+ld9LQkuWWC+/r2XTUWnbcZlBOpnSoBt3iZIwKcXCQnggiFP3L6I2cnM07u1Hnnu1ypWZcHwqrFZ2YK1yIj6P+GUMz3HDAkB8iSryFB8y6WLuYR/97K0Wg/ ansible host
+
+
+        - name : copy sudoers file
+          tags : always
+          copy : 
+                 src : harsha
+                 dest : /etc/sudoers.d/harsha
+                 owner : root
+                 group : root
+                 mode : 0440 
+
+
+
+

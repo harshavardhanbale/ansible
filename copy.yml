@@ -5,7 +5,7 @@
         - name: copying one file to onether
           tags: copy harsha to folder vardhan
           copy:
-                  src: /home/ubuntu/ansible/harsha/file
+                  src: file
                   dest: /var/www/harsha.file
                   owner: root
                   group: root
