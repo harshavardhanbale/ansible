@@ -1,21 +1,52 @@
 ---
 
-- hosts: all
+- hosts: appserver
   become: true
   tasks:
 
         - name: updateing apt
+          tags: apt_update, appserver
           apt:
                   update_cache: yes
   
 
         - name: installing net-tools package
+          tags: net-tools,appserver
           apt:
-                name: python3-ldap
+                name: 
+                       - "{{apache_package}}"
+                       - "{{php_package}}"
                 state: latest
+                #when: ansible_hostname == "ansible-agent1"
+                #        "ansible_all_ipv4_addresses":           "172.31.33.28"
 
 
         - name: installing python3-ldap package
           apt:
                 name: python3-ldap
                 state: latest
+- hosts: webserver
+  become: true
+  pre_tasks: 
+        
+        - name: updateing apt
+          tags: apt_update, webserver
+          apt:
+                  update_cache: yes
+
+
+        - name: installing net-tools package
+          apt:
+                name:
+                       - "{{apache_package}}"
+                       - "{{php_package}}"
+                state: latest
+                #when: ansible_hostname == "ansible-agent1"
+                #        "ansible_all_ipv4_addresses":           "172.31.33.28"
+
+
+        - name: installing python3-ldap package
+          apt:
+                name: python3-ldap
+                state: latest
+
